@@ -11,6 +11,7 @@ import java.util.HashSet;
 import java.util.List;
 
 public class GradesDB {
+    private File file;
     private int numStudents;
     private int numAssignments;
     private int numProjects;
@@ -19,8 +20,7 @@ public class GradesDB {
 
     private HashSet<Student> students = new HashSet<Student>();
     public GradesDB(String filePath) throws IOException {
-        File file = new File(this.getClass().getClassLoader().getResource(filePath).getFile());
-        System.out.println("file "+ file.toString());
+        file = new File(this.getClass().getClassLoader().getResource(filePath).getFile());
         FileInputStream fileInputStream = new FileInputStream(file);
         workbook = new XSSFWorkbook(fileInputStream);
         sheetNames = new ArrayList<String>();
@@ -41,10 +41,9 @@ public class GradesDB {
         XSSFSheet sheet = ((XSSFWorkbook) workbook).getSheetAt(sheetNames.indexOf(STUDENT_INFO));
         Student student;
         for (Row row : sheet) {//for each row in the sheet
-            if (row.getRowNum() == 0) {//skip the header row
-                System.out.println(row.getRowNum());
+            if (row.getRowNum() == 0) //skip the header row
                 continue;
-            }
+
             student = new Student();
             List<Integer> languages = new ArrayList<Integer>();
             student.setName(row.getCell(0).getStringCellValue());
