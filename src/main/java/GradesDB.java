@@ -1,3 +1,8 @@
+/*
+    Triston Gregoire
+    April 11, 2019
+    Software Testing & QA
+ */
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
@@ -10,6 +15,9 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
+/*
+Expects database file to be in resources /resources/DB/
+ */
 public class GradesDB {
     private File file;
     private int numStudents;
@@ -20,7 +28,7 @@ public class GradesDB {
 
     private HashSet<Student> students = new HashSet<Student>();
     public GradesDB(String filePath) throws IOException {
-        file = new File(this.getClass().getClassLoader().getResource(filePath).getFile());
+        file = new File(getClass().getResource(filePath).getFile());
         FileInputStream fileInputStream = new FileInputStream(file);
         workbook = new XSSFWorkbook(fileInputStream);
         sheetNames = new ArrayList<String>();
@@ -33,7 +41,6 @@ public class GradesDB {
     /*
     Uses Apache's JOI library to read excel file and populates Student objects with the data. Most of the data is eventually stored in a Hashset collection
 
-    TODO: read in TeamGrades and Teams excel sheets
      */
     private void readStudentsInfo() {
         List<Student> studentList = new ArrayList<Student>();

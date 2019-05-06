@@ -1,3 +1,8 @@
+/*
+    Triston Gregoire
+    April 11, 2019
+    Software Testing & QA
+ */
 import java.util.List;
 
 public class Student {
